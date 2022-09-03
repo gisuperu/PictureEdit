@@ -1,0 +1,27 @@
+#! /bin/sh
+
+set -e
+
+if ! [ -e "$1" ]; then
+    echo "$1 is not file."
+    exit 1
+elif ! [ -e "$2" ]; then
+    echo "$2 is not file."
+    exit 1
+elif ! [ -e "$3" ]; then
+    echo "$3 is not file."
+    exit 1
+fi
+
+if [ -e "$4" ]; then
+    cc $1
+    ./a.out $2 $3 $4
+    xv $2 &
+    xv $3 &
+    xv $4 &
+else
+    cc $1
+    ./a.out $2 $3
+    xv $2 &
+    xv $3 &
+fi
